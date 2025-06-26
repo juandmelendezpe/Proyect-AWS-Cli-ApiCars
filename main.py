@@ -54,7 +54,7 @@ autos_db = [
     {
         "id": "3",
         "marca": "Ford",
-        "modelo": "Focus",
+        "modelo": "Focux",
         "anio": 2020,
         "precio": 18000.0,
         "color": "Azul",
