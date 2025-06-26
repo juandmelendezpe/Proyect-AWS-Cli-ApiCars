@@ -1,0 +1,91 @@
+<div class="container mt-4">
+  <h2>{{ isEditing ? 'Editar' : 'Agregar' }} Auto</h2>
+  
+  <div *ngIf="loading" class="text-center">
+    <p>Cargando...</p>
+  </div>
+
+  <div *ngIf="error" class="alert alert-danger">
+    {{ error }}
+  </div>
+
+  <form [formGroup]="autoForm" (ngSubmit)="onSubmit()" *ngIf="!loading">
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label for="marca" class="form-label">Marca</label>
+        <input type="text" class="form-control" id="marca" formControlName="marca" 
+               [ngClass]="{'is-invalid': submitted && f['marca'].errors}">
+        <div *ngIf="submitted && f['marca'].errors" class="invalid-feedback">
+          <div *ngIf="f['marca'].errors['required']">La marca es requerida</div>
+        </div>
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <label for="modelo" class="form-label">Modelo</label>
+        <input type="text" class="form-control" id="modelo" formControlName="modelo"
+               [ngClass]="{'is-invalid': submitted && f['modelo'].errors}">
+        <div *ngIf="submitted && f['modelo'].errors" class="invalid-feedback">
+          <div *ngIf="f['modelo'].errors['required']">El modelo es requerido</div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-3">
+        <label for="anio" class="form-label">Año</label>
+        <input type="number" class="form-control" id="anio" formControlName="anio"
+               [ngClass]="{'is-invalid': submitted && f['anio'].errors}">
+        <div *ngIf="submitted && f['anio'].errors" class="invalid-feedback">
+          <div *ngIf="f['anio'].errors['required']">El año es requerido</div>
+          <div *ngIf="f['anio'].errors['min']">El año debe ser mayor a 1900</div>
+          <div *ngIf="f['anio'].errors['max']">El año no puede ser futuro</div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-3">
+        <label for="precio" class="form-label">Precio</label>
+        <div class="input-group">
+          <span class="input-group-text">$</span>
+          <input type="number" class="form-control" id="precio" formControlName="precio"
+                 [ngClass]="{'is-invalid': submitted && f['precio'].errors}">
+          <div *ngIf="submitted && f['precio'].errors" class="invalid-feedback">
+            <div *ngIf="f['precio'].errors['required']">El precio es requerido</div>
+            <div *ngIf="f['precio'].errors['min']">El precio debe ser positivo</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-3">
+        <label for="color" class="form-label">Color</label>
+        <input type="text" class="form-control" id="color" formControlName="color"
+               [ngClass]="{'is-invalid': submitted && f['color'].errors}">
+        <div *ngIf="submitted && f['color'].errors" class="invalid-feedback">
+          <div *ngIf="f['color'].errors['required']">El color es requerido</div>
+        </div>
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <label for="kilometraje" class="form-label">Kilometraje</label>
+        <div class="input-group">
+          <input type="number" class="form-control" id="kilometraje" formControlName="kilometraje"
+                 [ngClass]="{'is-invalid': submitted && f['kilometraje'].errors}">
+          <span class="input-group-text">km</span>
+          <div *ngIf="submitted && f['kilometraje'].errors" class="invalid-feedback">
+            <div *ngIf="f['kilometraje'].errors['required']">El kilometraje es requerido</div>
+            <div *ngIf="f['kilometraje'].errors['min']">El kilometraje debe ser positivo</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <div class="form-check form-switch mt-4">
+          <input class="form-check-input" type="checkbox" id="disponible" formControlName="disponible">
+          <label class="form-check-label" for="disponible">Disponible para venta</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-3">
+      <button type="submit" class="btn btn-primary me-2">{{ isEditing ? 'Actualizar' : 'Guardar' }}</button>
+      <a routerLink="/autos" class="btn btn-secondary">Cancelar</a>
+    </div>
+  </form>
+</div>

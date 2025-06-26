@@ -1,0 +1,19 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "dist/tienda-autos-frontend/**",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(assets/.+)",
+      "dest": "/dist/tienda-autos-frontend/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/dist/tienda-autos-frontend/index.html"
+    }
+  ]
+}

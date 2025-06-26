@@ -1,0 +1,43 @@
+<div class="container mt-4">
+  <div *ngIf="loading" class="text-center">
+    <p>Cargando...</p>
+  </div>
+
+  <div *ngIf="error" class="alert alert-danger">
+    {{ error }}
+  </div>
+
+  <div *ngIf="auto" class="card">
+    <div class="card-header bg-primary text-white">
+      <h2>{{ auto.marca }} {{ auto.modelo }}</h2>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-6">
+          <h4>Detalles del Vehículo</h4>
+          <ul class="list-group">
+            <li class="list-group-item"><strong>Marca:</strong> {{ auto.marca }}</li>
+            <li class="list-group-item"><strong>Modelo:</strong> {{ auto.modelo }}</li>
+            <li class="list-group-item"><strong>Año:</strong> {{ auto.anio }}</li>
+            <li class="list-group-item"><strong>Color:</strong> {{ auto.color }}</li>
+            <li class="list-group-item"><strong>Kilometraje:</strong> {{ auto.kilometraje | number }} km</li>
+            <li class="list-group-item">
+              <strong>Estado:</strong> 
+              <span [ngClass]="auto.disponible ? 'badge bg-success' : 'badge bg-danger'">
+                {{ auto.disponible ? 'Disponible' : 'No disponible' }}
+              </span>
+            </li>
+            <li class="list-group-item"><strong>Precio:</strong> ${{ auto.precio | number:'1.2-2' }}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <div class="btn-group">
+        <a routerLink="/autos" class="btn btn-secondary">Volver</a>
+        <a [routerLink]="['/autos', auto.id, 'editar']" class="btn btn-warning">Editar</a>
+        <button (click)="eliminarAuto()" class="btn btn-danger">Eliminar</button>
+      </div>
+    </div>
+  </div>
+</div>
