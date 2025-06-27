@@ -70,7 +70,7 @@ def root():
 @app.post("/autos")
 def crear_auto(auto: Auto):
     auto.id = str(uuid.uuid4())
-    autos_db.append(auto.dict())
+    autos_db.append(auto.model_dump())
     return auto
 
 @app.get("/autos")
@@ -89,7 +89,7 @@ def actualizar_auto(auto_id: str, auto_actualizado: Auto):
     for i, auto in enumerate(autos_db):
         if auto["id"] == auto_id:
             auto_actualizado.id = auto_id
-            autos_db[i] = auto_actualizado.dict()
+            autos_db[i] = auto_actualizado.model_dump()
             return auto_actualizado
     raise HTTPException(status_code=404, detail="Auto no encontrado")
 
