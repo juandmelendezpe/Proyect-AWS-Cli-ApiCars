@@ -6,8 +6,9 @@ import uuid
 
 app = FastAPI(title="API Tienda de Autos")
 
-# Configurar CORS
+# Configurar CORS - permitir cualquier origen para pruebas
 origins = [
+    "*",
     "http://localhost:4200",
     "https://tienda-autos-frontend.vercel.app"
 ]
